@@ -18,3 +18,11 @@ pub mod template {
         instructions::create_state::handler(ctx, bump, nonce)
     }
 }
+#[zero_copy]
+#[derive(Default)]
+pub struct Decimal {
+    pub flags: u32,
+    pub hi: u32,
+    pub lo: u32,
+    pub mid: u32,
+}

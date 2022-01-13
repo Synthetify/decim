@@ -1,7 +1,8 @@
 use crate::structs::state::State;
 use anchor_lang::prelude::*;
 use anchor_lang::solana_program::system_program;
-
+use rust_decimal::prelude::FromPrimitive;
+use rust_decimal::Decimal;
 #[derive(Accounts)]
 #[instruction(bump: u8)]
 pub struct CreateState<'info> {
@@ -24,6 +25,7 @@ pub fn handler(ctx: Context<CreateState>, bump: u8, nonce: u8) -> ProgramResult 
         authority: *ctx.accounts.program_authority.key,
         nonce,
         bump,
+        dec: Decimal::from_f64(12.9999).unwrap(),
     };
     Ok(())
 }

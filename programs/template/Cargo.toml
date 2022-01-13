@@ -21,3 +21,4 @@ anchor-lang = "0.20.1"
 anchor-spl = "0.20.1"
 integer-sqrt = "0.1.5"
 uint = "0.9"
+rust_decimal = { git = "https://github.com/zetamarkets/rust-decimal.git", features = ["maths"] }

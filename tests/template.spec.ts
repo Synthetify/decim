@@ -32,7 +32,7 @@ describe('target', () => {
     const state = await template.getState()
     const { nonce, programAuthority } = await template.getProgramAuthority()
     const { bump } = await template.getStateAddress()
-
+    console.log(state.dec.toBN().toString())
     assert.ok(state.admin.equals(admin.publicKey))
     assert.ok(state.authority.equals(programAuthority))
     assert.ok(state.nonce === nonce)

@@ -12,6 +12,7 @@ import { IWallet } from '.'
 
 import { Template as TemplateType, IDL } from './idl/template'
 import { getProgramAddress, Network } from './network'
+import { Decimal } from './network copy'
 
 import { signAndSend } from './utils'
 export const SEED = 'Template'
@@ -92,9 +93,10 @@ export class Template {
     await signAndSend(new Transaction().add(ix), [admin], this.connection)
   }
 
-  async getState() {
+  async getState(): Promise<State> {
     const address = (await this.getStateAddress()).address
-    return (await this.program.account.state.fetch(address)) as State
+    const data = await this.program.account.state.fetch(address)
+    return { ...data, dec: new Decimal(data.dec.flags, data.dec.hi, data.dec.lo, data.dec.mid) }
   }
 }
 export interface State {
@@ -102,4 +104,5 @@ export interface State {
   nonce: number
   authority: PublicKey
   bump: number
+  dec: Decimal
 }
